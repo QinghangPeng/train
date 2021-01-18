@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -58,8 +60,10 @@ public class Adjacency {
         int rear = 0;
         int[] queue = new int[vertexs.size()];
         boolean[] visited = new boolean[vertexs.size()];
+        Map<String,Integer> map = new HashMap<>();
         for (int i = 0; i < vertexs.size(); i++) {
-            visited[i] = false;
+            map.put(vertexs.get(i).value,i);
+//            visited[i] = false;
         }
         System.out.println("BFS: ");
         for (int i = 0; i < vertexs.size(); i++) {
@@ -76,12 +80,13 @@ public class Adjacency {
                 Edge node = vertexs.get(j).firstEdge;
                 while (node != null) {
                     String k = node.value;
-                    /*if (!visited[k])
+                    int index = map.get(k);
+                    if (!visited[index])
                     {
-                        visited[k] = true;
-                        System.out.printf("%s ", mVexs[k].data);
-                        queue[rear++] = k;
-                    }*/
+                        visited[index] = true;
+                        System.out.printf("%s ", vertexs.get(index).value);
+                        queue[rear++] = index;
+                    }
                     node = node.next;
                 }
             }
